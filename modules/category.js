@@ -6,6 +6,9 @@ const categorySchema=new Schema({
     name:{
         type:Schema.Types.String,
         required:true,
+    },
+    assignedtasks:{
+        type:Schema.Types.Number,
     }
 })
 

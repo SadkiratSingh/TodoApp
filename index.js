@@ -1,6 +1,10 @@
-const express=require("express");
+// all requires
+const express = require("express");
 require('./config/mongoose');
-const app=express();
+const router = require('./routes');
+// all requires
+
+const app = express();
 const port=8000;
 
 //application level middleware
@@ -8,9 +12,7 @@ const port=8000;
 //MW1
 app.use(express.static('./assets'));
 //MW2
-app.get('/',function(req,res){
-    res.render('home')
-})
+app.use(router);
 
 
 
