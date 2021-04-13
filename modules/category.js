@@ -5,16 +5,17 @@ const {Schema,model} = mongoose;
 const categorySchema=new Schema({
     name:{
         type:Schema.Types.String,
+
+        //validation
         required:true,
-    },
-    assignedtasks:{
-        type:Schema.Types.Number,
+        minLength:3,
+        maxLength:200
     }
 })
 
 const Category = model('Category',categorySchema);
 
 module.exports = {
-    categorySchema : categorySchema ,
-    Category : Category
+    ctgSchema : categorySchema ,
+    ctgModel : Category
 }

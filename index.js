@@ -6,6 +6,8 @@ const router = require('./routes');
 
 const app = express();
 const port=8000;
+app.set('view engine','ejs');
+app.set('views','./views');
 
 //application level middleware
 
