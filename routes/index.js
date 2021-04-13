@@ -7,4 +7,7 @@ router.get('/',homeCont.home);
 /*mount a new router*/
 router.use('/category',require('./category'));
 
+/*mount a new router*/
+router.use('/task',require('./task'));
+
 module.exports=router;
