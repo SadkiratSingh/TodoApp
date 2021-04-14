@@ -9,7 +9,10 @@ const categorySchema=new Schema({
         //validation
         required:true,
         minLength:3,
-        maxLength:200
+        maxLength:200,
+
+        //indexes
+        unique:true,
     }
 })
 

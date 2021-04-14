@@ -6,12 +6,12 @@ function home(req,res){
 
 function create(req,res){
     let name = req.query.name;
-    console.log(name);
     let category = new ctgModel({name:name});
-    console.log(category)
+
+    //save takes care to call validate fxn on the created document.
     category.save(function(err){
-        if(err) return console.log(err);
-        return console.log("Success!!")
+        if(err) console.log(err);
+        return res.redirect('/category');
     })
 }
 
