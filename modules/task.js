@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const {Schema,model} = mongoose;
-const categoryReq = require('./modules/category');
 
 const taskSchema = new Schema({
     name:{
@@ -16,12 +15,21 @@ const taskSchema = new Schema({
         type:Schema.Types.Date,
 
         //validators
-        required:true
+        required:true,
+        validate:{
+            validator:function(date){
+                let currentDate = new Date().getTime();
+                let newDate = new Date(date).getTime();
+                return newDate-currentDate>0;
+            },
+            message:"Please enter a valid time",
+        }
     },
-
-    category:categoryReq.categorySchema
 });
 
 const Task = model('Task',taskSchema);
 
-module.exports = Task;
+module.exports = {
+    taskSchema : taskSchema,
+    Task : Task
+}

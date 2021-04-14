@@ -13,16 +13,18 @@
     <!--form to fill task details-->
     <article id='form-article'>
         <h3>Create Your task here:</h3>
-        <form action='/task/create/'>
+        <form action='/task/create/' method='post'>
             <div>
                 <input type='text' name='name' placeholder='Input new task here'/>
             </div>
             <div>
-                <input type='date' name='deadline'>
+                <input type='datetime-local' name='deadline'>
             </div>
             <div>
                 <select name='category'>
-
+                    <% for (var item of categories) { %>
+                        <option value='<%= item.name %>'><%= item.name %></option>
+                    <% } %>
                 </select>
             </div>
             <div>

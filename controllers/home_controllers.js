@@ -1,5 +1,12 @@
+const ctgModel = require('../modules/category').ctgModel
+
 function home(req,res){
-    res.render('home');
+    ctgModel.find({},function(err,categories){
+        if(err) return console.log(err);
+        res.render('home',{
+            'categories':categories,
+        });
+    })
 }
 
 module.exports={

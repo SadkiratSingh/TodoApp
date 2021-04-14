@@ -14,7 +14,18 @@
     <article id='category-article'>
         <h3>All MY CATEGORIES:</h3>
         <ul class='task-category-list'>
-            <!--all my category details-->
+
+            <% if(categorylist.length==0) { %>
+
+                <li>No Categories Added</li>
+
+            <% }else{ %>
+
+                <% for (let item of categorylist) { %>
+                    <li class='category-list-item'><%= item.name %></li>
+                <% } %>
+
+            <% } %>
         </ul>
     </article>
 

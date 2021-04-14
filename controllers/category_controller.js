@@ -1,7 +1,14 @@
 const {ctgSchema,ctgModel} = require('../modules/category');
 
 function home(req,res){
-    res.render('categoryhome');
+    ctgModel.find({},function(err,ctgList){
+        if(err) return console.log("Error in retrieving documents")
+        res.render('categoryhome',{
+            'categorylist':ctgList
+        });
+        return;
+    })
+    
 }
 
 function create(req,res){
