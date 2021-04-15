@@ -8,11 +8,11 @@ function create(req,res){
 
     ctgModel.findOne({name:category},function(err,ctgDoc){
         if(err) return console.log(err);
-        
+
         ctgDoc.tasks.push({name:task,deadline:deadline});
         ctgDoc.save(function(err){
             if(err) return console.log(err)
-            console.log("Success!!");
+            return res.redirect('/');
         });
     });
 }

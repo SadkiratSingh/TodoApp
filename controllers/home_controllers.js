@@ -1,62 +1,36 @@
 const ctgModel = require('../modules/category').ctgModel
-const oneDay = 24*60*60*1000;
+const datefxns = require('../utility/handle_dates');
+const mongoose = require('mongoose');
 
-//utility functions
-function calcDaysLeftUtil(last,current){
-    let milliLast = last.getTime();
-    let milliCurrent = current.getTime();
-    let milliLeft = milliLast - milliCurrent;
-    return Math.round(milliLeft/oneDay);
-}
-
-function convertIST(utcDate){
-    let localDateString = utcDate.toLocaleString();
-    let date = new Date(localDateString);
-    return date;
-}
-
-function calcDaysLeft(lastDate){
-    let daysLeft = calcDaysLeftUtil(convertIST(lastDate),new Date());
-    return daysLeft;
-}
-
-function pastDeadline(lastDate){
-    let a = new Date().getTime();
-    let b = convertIST(lastDate).getTime();
-    return a > b;
-}
-
-function calcLastDate(lastDate){
-    let localDateString = lastDate.toLocaleString();
-    return localDateString.split(",")[0];
-}
 
 // for what to display
 function home(req,res){
-    let modelQuery = ctgModel.find().lean();
+    let modelQuery = ctgModel.find();
     modelQuery.exec(function(err,categories){
         if(err) return console.log(err);
 
-        let allTasks=[];
+        let taskDocs=[];
         categories.forEach((doc)=>{
-          allTasks=allTasks.concat(doc.tasks);
+          taskDocs=taskDocs.concat(doc.tasks);
         });
-
-        allTasks.forEach((task)=>{
-            task.lastDate = calcLastDate(task.deadline);
-            task.daysLeft = calcDaysLeft(task.deadline);
-            if(task.daysLeft <= 7){
+        let taskObjects=taskDocs.map((task)=>{
+            let parent = task.parent();
+            task = task.toObject();
+            task.category = parent.name; 
+            task.lastDate = datefxns.calcLastDate(task.deadline);
+            task.daysLeft = datefxns.calcDaysLeft(task.deadline);
+            if(task.daysLeft <= 7 && !datefxns.pastDeadline(task.deadline)){
                 task.warningMsg = "We are approaching the deadline";
             }
-            if(pastDeadline(task.deadline)){
+            else if(datefxns.pastDeadline(task.deadline)){
                 task.expireMsg = "We are past the deadline";
             }
+            return task;
         });
-
-        console.log(allTasks);
+        console.log(taskObjects);
         return res.render('home',{
             'categories':categories,
-            'alltasks': allTasks
+            'tasks': taskObjects 
         });
     });
 }

@@ -35,8 +35,19 @@
 
     <article>
         <h3>My Tasks:</h3>
-        <ul class='my-tasks'>
-            
+        <ul class='my-current-tasks'>
+            <% for (var task of tasks){ %>
+                <li class='task-item'>
+                    <p><%= task.name %></p>
+                    <p><%= task.lastDate %></p>
+                    <% if(task.warningMsg){ %>
+                        <p><%= task.warningMsg %></p>
+                    <% } %>
+                    <% if(task.expireMsg){ %>
+                        <p><%= task.expireMsg %></p>
+                    <% } %>
+                </li>
+            <%} %>
         </ul>
     </article>
 </body>
