@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Category Tasks</title>
+</head>
+<body>
+    <!--content heading-->
+    <h1>VIEW <%= category.toUpperCase() %> TASKS</h1>
+
+    <!--Category Block-->
+    <article id='tasks-article'>
+        <h3>All MY TASKS:</h3>
+        <ul class='task-list'>
+
+            <% if(tasks.length==0) { %>
+
+                <li>No Tasks Added</li>
+
+            <% }else{ %>
+
+                <% for (var task of tasks){ %>
+                    <li id='<%= task._id %>' class='task-item'>
+
+                        <p><%= task.name %></p>
+                        <p><%= task.lastDate %></p>
+                        <% if(task.warningMsg){ %>
+                            <p><%= task.warningMsg %></p>
+                        <% } %>
+                        <% if(task.expireMsg){ %>
+                            <p><%= task.expireMsg %></p>
+                        <% } %>
+                        <p><a href="/task/<%= task.category %>"></p><%= task.category %></a></p>
+                    </li>
+                <%} %>
+
+            <% } %>
+        </ul>
+    </article>
+</body>
+</html>
