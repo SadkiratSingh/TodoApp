@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='/css/master_css.css' rel='stylesheet'>
     <title>Display Category Tasks</title>
 </head>
 <body>
@@ -23,7 +24,7 @@
 
                 <% for (var task of tasks){ %>
                     <li id='<%= task._id %>' class='task-item'>
-
+                        <input type='checkbox' name='<%= category %>' class='task-marker'>
                         <p><%= task.name %></p>
                         <p><%= task.lastDate %></p>
                         <% if(task.warningMsg){ %>
@@ -35,9 +36,10 @@
                         <p><a href="/task/<%= task.category %>"></p><%= task.category %></a></p>
                     </li>
                 <%} %>
-
+                <button class='delete-task'>DELETE</button>
             <% } %>
         </ul>
     </article>
+    <script src='/js/script_master.js'></script>
 </body>
 </html>
