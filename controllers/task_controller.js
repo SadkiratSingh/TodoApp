@@ -50,7 +50,13 @@ function displayCategoryTasks(req,res){
     });
 }
 
+function taskDelete(req,res){
+    console.log(req.body);
+    res.json({message:'I will soon begin to process the request'});
+}
+
 module.exports={
     create:create,
-    displayCategoryTasks:displayCategoryTasks
+    displayCategoryTasks:displayCategoryTasks,
+    taskDelete:taskDelete
 }
