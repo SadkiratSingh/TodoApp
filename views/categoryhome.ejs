@@ -10,7 +10,7 @@
     <!--content heading-->
     <h1>CATEGORY MANAGEMENT</h1>
 
-    <!--Category Block-->
+    <!--Category-view-Block-->
     <article id='category-article'>
         <h3>All MY CATEGORIES:</h3>
         <ul class='task-category-list'>
@@ -22,7 +22,11 @@
             <% }else{ %>
 
                 <% for (let item of categorylist) { %>
-                    <li class='category-list-item'><%= item.name %></li>
+                    <li class='category-list-item'>
+                        <p class='category-name'><%= item.name %> </p>
+                        <button class='delete-category'><a href='category/delete/<%= item.name %>'>DELETE</a></button>
+                        <button class='rename-category'>RENAME</button>
+                    </li>
                 <% } %>
 
             <% } %>
@@ -41,5 +45,20 @@
             </div>
         </form>
     </article>
+
+    <!--RENAME CATEGORY-->
+    <article id='update-form-article'>
+        <h3>RENAME CATEGORY:</h3>
+        <form class='rename-category-form' action='/category/rename' method='get'>
+            <input type='hidden' name='org'>
+            <div>
+                <input type='text' name='name'/>
+            </div>
+            <div>
+                <input type='submit' value="Submit">
+            </div>
+        </form>
+    </article>
+    <script src='/js/category_script_master.js'></script>
 </body>
 </html>

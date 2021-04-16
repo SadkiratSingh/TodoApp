@@ -16,12 +16,33 @@ function create(req,res){
 
     //save takes care to call validate fxn on the created document.
     category.save(function(err){
-        if(err) console.log(err);
+        if(err) return console.log(err);
         return res.redirect('/category');
     })
 }
 
+function deleteCategory(req,res){
+    let category = req.params.ctg;
+    ctgModel.deleteOne({name:category},function(err,doc){
+        if(err) return console.log(err)
+        res.redirect('back');
+    })
+}
+
+function renameCategory(req,res){
+    ctgModel.findOne({name:req.query.org},function(err,doc){
+        if(err) return console.log(err);
+        doc.name = req.query.name;
+        doc.save(function(err){
+            if(err) return console.log(err);
+            return res.redirect('back');
+        });
+    });
+}
+
 module.exports={
     home:home,
-    create:create
+    create:create,
+    deleteCategory:deleteCategory,
+    renameCategory:renameCategory
 }
