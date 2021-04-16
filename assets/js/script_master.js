@@ -1,4 +1,6 @@
 const allTaskChecks = document.querySelectorAll('.task-marker');
+const allupdateButtons = document.querySelectorAll('update-task-details');
+const deleteButton = document.querySelector('.delete-task');
 
 allTaskChecks.forEach(function(item){
     item.addEventListener('click',function(event){
@@ -14,8 +16,6 @@ function getSelectedItems(){
     return selectedItems;
 }
 
-
-const deleteButton = document.querySelector('.delete-task');
 deleteButton.addEventListener('click',function(event){
     let selectedItems = getSelectedItems();
     deleteAction(selectedItems).then( // contruct the ajax call from here //
@@ -59,4 +59,6 @@ async function deleteAction(itemsToDelete){
         throw e;
     } 
 }
+
+
 

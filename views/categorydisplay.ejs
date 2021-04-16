@@ -11,7 +11,7 @@
     <!--content heading-->
     <h1>VIEW <%= category.toUpperCase() %> TASKS</h1>
 
-    <!--Category Block-->
+    <!--Tasks Block-->
     <article id='tasks-article'>
         <h3>All MY TASKS:</h3>
         <ul class='task-list'>
@@ -33,6 +33,7 @@
                         <% if(task.expireMsg){ %>
                             <p><%= task.expireMsg %></p>
                         <% } %>
+                        <button id='<%= category %>' class='update-task-details'>Update</button>
                         <p><a href="/task/<%= task.category %>"></p><%= task.category %></a></p>
                     </li>
                 <%} %>
@@ -40,6 +41,25 @@
             <% } %>
         </ul>
     </article>
+
+    <article>
+        <h3>Update Task Details Form:</h3>
+        <form action='/task/update/' method='post'>
+            <div>
+                <input type='text' name='name'/>
+            </div>
+            <div>
+                <input type='datetime-local' name='deadline'>
+            </div>
+            <div>
+                <input type='text' name='category'/>
+            </div>
+            <div>
+                <input type='submit' value="update">
+            </div>
+        </form>
+    </article>
+
     <script src='/js/script_master.js'></script>
 </body>
 </html>
