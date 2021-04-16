@@ -16,7 +16,10 @@ deleteButton.addEventListener('click',function(event){
     const selectedItems = allTaskArray.filter((item)=>{
         return item.checked;
     })
-    deleteAction(selectedItems) // contruct the ajax call from here //
+    deleteAction(selectedItems).then( // contruct the ajax call from here //
+        (res)=>console.log(res),
+        (err)=>console.log(err)
+    )
 });
 
 async function deleteAction(itemsToDelete){
@@ -43,7 +46,7 @@ async function deleteAction(itemsToDelete){
                 httpObj.send(data);
             })
         })();
-        console.log(response);
+        return response;
     }
     catch(e){
         throw e;

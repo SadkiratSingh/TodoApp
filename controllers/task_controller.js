@@ -51,8 +51,25 @@ function displayCategoryTasks(req,res){
 }
 
 function taskDelete(req,res){
-    console.log(req.body);
-    res.json({message:'I will soon begin to process the request'});
+    let modelQuery = ctgModel.find({name : {$in: Object.keys(req.body)}});
+    modelQuery.exec(function(err,docs){
+        if(err) return console.log(err);
+        let docPromises=docs.map(function(doc){
+            for(let i=0;i<doc.tasks.length;i++){
+                console.log(doc.tasks[i]);
+            }
+            return doc.save();
+        })
+        Promise.all(docPromises).then(
+            results=>{
+                res.json({message:"Success!!"});
+            }
+        ).catch(
+            err=>{
+                res.json({message:"Internal Server Error!!"});
+            }
+        )
+    })
 }
 
 module.exports={
