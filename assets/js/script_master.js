@@ -1,7 +1,3 @@
-alert("hello World!")
-
-
-
 const allTaskChecks = document.querySelectorAll('.task-marker');
 
 allTaskChecks.forEach(function(item){
@@ -10,14 +6,25 @@ allTaskChecks.forEach(function(item){
     })
 })
 
-const deleteButton = document.querySelector('.delete-task');
-deleteButton.addEventListener('click',function(event){
+function getSelectedItems(){
     let allTaskArray = Array.prototype.slice.call(allTaskChecks);
-    const selectedItems = allTaskArray.filter((item)=>{
+    let selectedItems = allTaskArray.filter((item)=>{
         return item.checked;
     })
+    return selectedItems;
+}
+
+
+const deleteButton = document.querySelector('.delete-task');
+deleteButton.addEventListener('click',function(event){
+    let selectedItems = getSelectedItems();
     deleteAction(selectedItems).then( // contruct the ajax call from here //
-        (res)=>console.log(res),
+        (res)=>{
+            console.log(res);
+            for(item of selectedItems){
+                item.parentElement.style.display='none';
+            }
+        },
         (err)=>console.log(err)
     )
 });

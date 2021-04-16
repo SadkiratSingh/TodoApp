@@ -16,14 +16,6 @@ const taskSchema = new Schema({
 
         //validators
         required:true,
-        validate:{
-            validator:function(date){
-                let currentDate = new Date().getTime();
-                let newDate = new Date(date).getTime();
-                return newDate-currentDate>0;
-            },
-            message:"Please enter a valid time",
-        }
     },
 });
 
