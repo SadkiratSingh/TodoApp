@@ -11,8 +11,27 @@
     <!--content heading-->
     <h1>VIEW <%= category.toUpperCase() %> TASKS</h1>
 
-    <!--Tasks Block-->
-    <article id='tasks-article'>
+    <!--form to fill task details and create task-->
+    <article id='form-article'>
+        <h3>Create Your task here:</h3>
+        <form action='/task/create/' method='post'>
+            <div>
+                <input type='text' name='name' placeholder='Input new task here'/ required>
+            </div>
+            <div>
+                <input type='datetime-local' name='deadline' required>
+            </div>
+            <div>
+                <input type='text' name='category' value='<%= category %>' readonly required>
+            </div>
+            <div>
+                <input type='submit' value="create">
+            </div>
+        </form>
+    </article>
+
+    <!--Tasks View Block-->
+    <article id='tasks-view-article'>
         <h3>All MY TASKS:</h3>
         <ul class='task-list'>
 
@@ -43,6 +62,7 @@
         </ul>
     </article>
 
+    <!--Tasks Update Block-->
     <article class='tasks-update-form-article'>
         <h3>Update Task Details Form:</h3>
         <form class='tasks-update-form' action='/task/update/' method='post'>

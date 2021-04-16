@@ -6,7 +6,6 @@ function create(req,res){
     let task = req.body.name;
     let deadline = req.body.deadline;
     let category = req.body.category;
-    console.log(deadline);
 
     ctgModel.findOne({name:category},function(err,ctgDoc){
         if(err) return console.log(err);
@@ -14,7 +13,7 @@ function create(req,res){
         ctgDoc.tasks.push({name:task,deadline:deadline});
         ctgDoc.save(function(err){
             if(err) return console.log(err)
-            return res.redirect('/');
+            return res.redirect('back');
         });
     });
 }

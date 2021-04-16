@@ -9,57 +9,16 @@
 <body>
     <!--project heading-->
     <h1>MY TODO LIST</h1>
-
-    <!--form to fill task details-->
-    <article id='form-article'>
-        <h3>Create Your task here:</h3>
-        <form action='/task/create/' method='post'>
-            <div>
-                <input type='text' name='name' placeholder='Input new task here'/>
-            </div>
-            <div>
-                <input type='datetime-local' name='deadline'>
-            </div>
-            <div>
-                <select name='category'>
-                    <% for (var item of categories) { %>
-                        <option value='<%= item.name %>'><%= item.name %></option>
-                    <% } %>
-                </select>
-            </div>
-            <div>
-                <input type='submit' value="create">
-            </div>
-        </form>
-    </article>
-
     <article id='all-tasks-collection'>
-        <h3>My Tasks:</h3>
-        <ul class='all-my-tasks'>
-            <% if(tasks.length == 0){ %>
-
-                <li>No Tasks Added</li>
-
-            <% }else{ %>
-
-                <% for (var task of tasks){ %>
-                    <li id='<%= task._id %>' class='task-item'>
-
-                        <p><%= task.name %></p>
-                        <p><%= task.lastDate %></p>
-                        <p><%= task.lastTime %></p>
-                        <% if(task.warningMsg){ %>
-                            <p><%= task.warningMsg %></p>
-                        <% } %>
-                        <% if(task.expireMsg){ %>
-                            <p><%= task.expireMsg %></p>
-                        <% } %>
-                        <p><a href="/task/<%= task.category %>"><%= task.category %></a></p>
-                    </li>
-                <%} %>
-
+        <form action='/' method='get'>
+            <select name='category'>
+            <% for (let category of categories){ %>
+                <option value='<%= category.name %>'><%= category.name %></option>
             <% } %>
-        </ul>
+            </select>
+            <input type="submit" value='SUBMIT'>
+        </form>
+        <button><a href='/category'>MANAGE CATEGORIES</a></button>
     </article>
 </body>
 </html>
