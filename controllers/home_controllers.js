@@ -22,7 +22,7 @@ function home(req,res){
             
              /* start modifying the task document after converting to simple js object */
             task.category = parent.name; 
-            task.lastDate = datefxns.calcLastDate(task.deadline);
+            [task.lastDate, task.lastTime] = datefxns.calcLastDateAndTime(task.deadline);
             task.daysLeft = datefxns.calcDaysLeft(task.deadline);
             if(task.daysLeft <= 7 && !datefxns.pastDeadline(task.deadline)){
                 task.warningMsg = "We are approaching the deadline";

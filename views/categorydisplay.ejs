@@ -25,16 +25,17 @@
                 <% for (var task of tasks){ %>
                     <li id='<%= task._id %>' class='task-item'>
                         <input type='checkbox' name='<%= category %>' class='task-marker'>
-                        <p><%= task.name %></p>
-                        <p><%= task.lastDate %></p>
+                        <p class='task-name'><%= task.name %></p>
+                        <p class='task-date'><%= task.lastDate %></p>
+                        <p class='task-time'><%= task.lastTime %></p>
                         <% if(task.warningMsg){ %>
-                            <p><%= task.warningMsg %></p>
+                            <p class='task-warning'><%= task.warningMsg %></p>
                         <% } %>
                         <% if(task.expireMsg){ %>
-                            <p><%= task.expireMsg %></p>
+                            <p class='task-expire'><%= task.expireMsg %></p>
                         <% } %>
                         <button id='<%= category %>' class='update-task-details'>Update</button>
-                        <p><a href="/task/<%= task.category %>"></p><%= task.category %></a></p>
+                        <p class='task-category'><a href="/task/<%= task.category %>"><%= task.category %></a></p>
                     </li>
                 <%} %>
                 <button class='delete-task'>DELETE</button>
@@ -42,17 +43,18 @@
         </ul>
     </article>
 
-    <article>
+    <article class='tasks-update-form-article'>
         <h3>Update Task Details Form:</h3>
-        <form action='/task/update/' method='post'>
+        <form class='tasks-update-form' action='/task/update/' method='post'>
+            <input type='hidden' name='id'>
             <div>
-                <input type='text' name='name'/>
+                <input type='text' name='name'/ required>
             </div>
             <div>
-                <input type='datetime-local' name='deadline'>
+                <input type='datetime-local' name='deadline' required>
             </div>
             <div>
-                <input type='text' name='category'/>
+                <input type='text' name='category'/ readonly required>
             </div>
             <div>
                 <input type='submit' value="update">

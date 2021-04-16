@@ -47,13 +47,14 @@
 
                         <p><%= task.name %></p>
                         <p><%= task.lastDate %></p>
+                        <p><%= task.lastTime %></p>
                         <% if(task.warningMsg){ %>
                             <p><%= task.warningMsg %></p>
                         <% } %>
                         <% if(task.expireMsg){ %>
                             <p><%= task.expireMsg %></p>
                         <% } %>
-                        <p><a href="/task/<%= task.category %>"></p><%= task.category %></a></p>
+                        <p><a href="/task/<%= task.category %>"><%= task.category %></a></p>
                     </li>
                 <%} %>
 

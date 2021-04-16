@@ -1,10 +1,25 @@
 const allTaskChecks = document.querySelectorAll('.task-marker');
-const allupdateButtons = document.querySelectorAll('update-task-details');
+const allupdateButtons = document.querySelectorAll('.update-task-details');
 const deleteButton = document.querySelector('.delete-task');
+const updateForm = document.querySelector('.tasks-update-form');
 
 allTaskChecks.forEach(function(item){
     item.addEventListener('click',function(event){
         item.parentElement.classList.toggle('selectToDelete');
+    })
+})
+
+allupdateButtons.forEach(function(item){
+    item.addEventListener('click',function(event){
+        let name = item.parentElement.querySelector('.task-name').innerText;
+        let time = item.parentElement.querySelector('.task-time').innerText;
+        let date = item.parentElement.querySelector('.task-date').innerText;
+        let category = item.parentElement.querySelector('.task-category').innerText;
+        let dateTimeObj = new Date(date.concat(",",time));
+        let updateFormCtrls = updateForm.elements;
+        updateFormCtrls['name'].value = name;
+        updateFormCtrls['category'].value = category;
+        updateFormCtrls['id'].value = item.parentElement.id;
     })
 })
 
@@ -28,6 +43,8 @@ deleteButton.addEventListener('click',function(event){
         (err)=>console.log(err)
     )
 });
+
+
 
 async function deleteAction(itemsToDelete){
     try{

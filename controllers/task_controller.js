@@ -6,6 +6,7 @@ function create(req,res){
     let task = req.body.name;
     let deadline = req.body.deadline;
     let category = req.body.category;
+    console.log(deadline);
 
     ctgModel.findOne({name:category},function(err,ctgDoc){
         if(err) return console.log(err);
@@ -33,7 +34,7 @@ function displayCategoryTasks(req,res){
 
             /* start modifying the task document after converting to simple js object */
             task.category = parent.name; 
-            task.lastDate = datefxns.calcLastDate(task.deadline);
+            [task.lastDate,task.lastTime] = datefxns.calcLastDateAndTime(task.deadline);
             task.daysLeft = datefxns.calcDaysLeft(task.deadline);
             if(task.daysLeft <= 7 && !datefxns.pastDeadline(task.deadline)){
                 task.warningMsg = "We are approaching the deadline";
@@ -77,8 +78,29 @@ function taskDelete(req,res){
     })
 }
 
+function taskUpdate(req,res){
+    let task = req.body.name;
+    let deadline = req.body.deadline;
+    let category = req.body.category;
+    let taskId = req.body.id;
+
+    ctgModel.findOne({name:category},function(err,ctgDoc){
+        if(err) return console.log(err);
+
+        let taskToUpdate = ctgDoc.tasks.id(taskId);
+        taskToUpdate.name = task;
+        taskToUpdate.deadline = deadline;
+        ctgDoc.save(function(err){
+            if(err) return console.log(err)
+            return res.redirect('back');
+        });
+    });
+
+}
+
 module.exports={
     create:create,
     displayCategoryTasks:displayCategoryTasks,
-    taskDelete:taskDelete
+    taskDelete:taskDelete,
+    taskUpdate:taskUpdate
 }

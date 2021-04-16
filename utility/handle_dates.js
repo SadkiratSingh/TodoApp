@@ -25,9 +25,9 @@ function pastDeadline(lastDate){
     return a > b;
 }
 
-function calcLastDate(lastDate){
+function calcLastDateAndTime(lastDate){
     let localDateString = lastDate.toLocaleString();
-    return localDateString.split(",")[0];
+    return localDateString.split(",");
 }
 
 module.exports={
@@ -35,5 +35,5 @@ module.exports={
     convertIST:convertIST,
     calcDaysLeft: calcDaysLeft,
     pastDeadline:pastDeadline,
-    calcLastDate:calcLastDate
+    calcLastDateAndTime:calcLastDateAndTime
 }
