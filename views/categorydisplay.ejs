@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='/css/master_css.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <title>Display Category Wise Tasks</title>
 </head>
 <body>
@@ -12,76 +14,150 @@
     <h1>VIEW <%= category.toUpperCase() %> TASKS</h1>
 
     <!--form to fill task details and create task-->
-    <article id='task-creation-form-article'>
-        <h3>Create Your task here:</h3>
-        <form class='task-creation-form' action='/task/create/' method='post'>
-            <div>
-                <input type='text' name='name' placeholder='Input new task here'/ required>
-            </div>
-            <div>
-                <input type='datetime-local' name='deadline' required>
-            </div>
-            <div>
-                <input type='text' name='category' value='<%= category %>' readonly required>
-            </div>
-            <div>
-                <input type='submit' value="create">
-            </div>
-        </form>
-    </article>
+    <div class='styling-form create-form-appear'>
+
+        <article id='task-creation-form-article'>
+
+            <h3>Create Your task here:</h3>
+
+            <form class='task-creation-form' action='/task/create/' method='post'>
+
+                <div class='form-item'>
+                    <label for='task-name'>Enter Name:</label>
+                    <div>
+                        <input id='task-name'type='text' name='name' placeholder='Input new task here'/ required>
+                    </div>
+                </div>
+
+                <div class='form-item'>
+                    <label for='due-date'>Complete By:</label>
+                    <div>
+                        <input id='due-date' type='datetime-local' name='deadline' required>
+                    </div>
+                </div>
+
+                <div class='form-item'>
+                    <label for='category-name'>Category:</label>
+                    <div>
+                        <input id='category-name' type='text' name='category' value='<%= category %>' readonly required>
+                    </div>
+                </div>
+
+                <div class='form-item'>
+                    <div>
+                        <input class='task-submit' type='submit' value="create">
+                    </div>
+                </div>
+
+            </form>
+
+        </article>
+
+    </div>
 
     <!--Tasks View Block-->
-    <article id='tasks-view-article'>
-        <h3>All MY TASKS:</h3>
-        <ul class='task-list'>
+    <div class='style-view-tasks'>
 
-            <% if(tasks.length==0) { %>
+        <article id='tasks-view-article'>
 
-                <li>No Tasks Added</li>
+            <h3>All MY TASKS:</h3>
 
-            <% }else{ %>
+            <ul class='task-list'>
 
-                <% for (var task of tasks){ %>
-                    <li id='<%= task._id %>' class='task-item'>
-                        <input type='checkbox' name='<%= category %>' class='task-marker'>
-                        <p class='task-name'><%= task.name %></p>
-                        <p class='task-date'><%= task.lastDate %></p>
-                        <p class='task-time'><%= task.lastTime %></p>
-                        <% if(task.warningMsg){ %>
-                            <p class='task-warning'><%= task.warningMsg %></p>
-                        <% } %>
-                        <% if(task.expireMsg){ %>
-                            <p class='task-expire'><%= task.expireMsg %></p>
-                        <% } %>
-                        <button id='<%= category %>' class='update-task-details'>Update</button>
-                        <p class='task-category'><a href="/task/<%= task.category %>"><%= task.category %></a></p>
-                    </li>
-                <%} %>
-                <button class='delete-task'>DELETE</button>
-            <% } %>
-        </ul>
-    </article>
+                <% if(tasks.length==0) { %>
+
+                    <li>No Tasks Added</li>
+
+                <% }else{ %>
+
+                    <% for (var task of tasks){ %>
+                        <li id='<%= task._id %>' class='task-item'>
+
+                            <input type='checkbox' name='<%= category %>' class='task-marker'>
+                            <p class='task-name'><%= task.name %></p>
+                            <p class='task-date'><%= task.lastDate %></p>
+                            <p class='task-time'><%= task.lastTime %></p>
+
+                            <button id='<%= category %>' class='update-task-details'>
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>
+
+                            <p class='task-category'><%= task.category %></p><!--hidden-->
+
+                            <% if(task.warningMsg || task.expireMsg){ %>
+
+                                <button class='alert-icon'>
+                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                                </button>
+
+                                <% if(task.warningMsg){ %>
+                                    <p class='task-warning'><%= task.warningMsg %></p><!--hidden-->
+                                <% } %>
+                                <% if(task.expireMsg){ %>
+                                    <p class='task-expire'><%= task.expireMsg %></p><!--hidden-->
+                                <% } %>
+                            <% } %>
+
+                        </li>
+                    <%} %>
+                <% } %>
+            </ul>
+
+            <div class='buttons-holder'>
+                <button class='delete-task'>DELETE TASKS</button>
+                <button class='create-task'>CREATE TASK</button>
+            </div>
+
+        </article>
+        
+    </div>
 
     <!--Tasks Update Block-->
-    <article class='tasks-update-form-article'>
-        <h3>Update Task Details Form:</h3>
-        <form class='tasks-update-form' action='/task/update/' method='post'>
-            <input type='hidden' name='id'>
-            <div>
-                <input type='text' name='name'/ required>
-            </div>
-            <div>
-                <input type='datetime-local' name='deadline' required>
-            </div>
-            <div>
-                <input type='text' name='category'/ readonly required>
-            </div>
-            <div>
-                <input type='submit' value="update">
-            </div>
-        </form>
-    </article>
+    <div class='styling-form update-form-appear'>
 
+        <article id='tasks-update-form-article'>
+
+            <h3>Update Task Details Form:</h3>
+
+            <form class='tasks-update-form' action='/task/update/' method='post'>
+
+                <div class='form-item'>
+                    <input type='hidden' name='id'>
+                </div>
+
+                <div class='form-item'>
+                    <label for='up-task-name'>Name:</label>
+                    <div>
+                        <input id='up-task-name' type='text' name='name'/ required>
+                    </div>
+                </div>
+
+                <div class='form-item'>
+                    <label for='up-due-date'>Name:</label>
+                    <div>
+                        <input id='up-due-date' type='datetime-local' name='deadline' required>
+                    </div>
+                </div>
+
+                <div class='form-item'>
+                    <label for='up-category-name'>Name:</label>
+                    <div>
+                        <input id='up-category-name' type='text' name='category'/ readonly required>
+                    </div>
+                </div>
+
+                <div class='form-item'>
+                    <div>
+                        <input class='task-submit' type='submit' value="update">
+                    </div>
+                </div>
+
+            </form>
+        </article>
+    </div>
+
+    <script src='/js/jquery-3.3.1.min.js'></script>
     <script src='/js/task_script_master.js'></script>
+    <script src="https://use.fontawesome.com/04e57a1c73.js"></script>
 </body>
 </html>

@@ -1,4 +1,171 @@
-.selectToDelete{
-    color:gray;
-    text-decoration:line-through;
+:root{
+    /*my color combination */
+    --light-blue:#6699FF;
+    --medium-blue:#3366CC;
+    --dark-blue:#003399;
+    --white:#FFFFFF;
+
+    /*font-families*/
+    --font-normal:'Open Sans', sans-serif;
+}
+
+body{
+    background-image:linear-gradient(to bottom right,var(--light-blue)1%,var(--white)99%);
+    background-repeat:no-repeat;
+    color:var(--dark-blue);
+    font-family:var(--font-normal);
+    border:1px solid black;
+    height:100vh;
+    margin:0;
+}
+
+/* STYLING FORMS */
+
+.styling-form{
+   position:absolute;
+   z-index:1000;
+   border:2px outset var(--white);
+   font-size:0.8rem;
+   transform: translateX(-100%);
+   transition:transform 0.3s ease-in;
+}
+
+.update-form-appear{
+    bottom:3rem;
+}
+
+.form-visible{
+    transform:translateX(0%);
+}
+
+.styling-form h3{
+    margin:0;
+    background-color:var(--dark-blue);
+    color:white;
+}
+
+.task-creation-form{
+    padding:0.15rem;
+}
+
+.form-item{   
+    padding:0.5rem;
+    display:flex;
+    justify-content:space-between;
+}
+
+.form-item input{
+    padding:0.4rem;
+    border-radius:0.5rem;
+    border:none;
+}
+
+.form-item > label{
+    font-weight:bold;
+    padding:0.5rem;
+}
+
+.task-submit{
+    background-color:var(--dark-blue);
+    color:white;
+}
+
+/* STYLING FORMS */
+
+.style-view-tasks{
+    border:5px ridge var(--dark-blue);
+    height:80%;
+    width:40%;
+    margin:0 auto;
+    overflow:auto;
+}
+.style-view-tasks h3{
+    text-align:center;
+    text-decoration:underline;
+    font-style: oblique;
+    font-size:1.5rem;
+    border:1px solid black;
+}
+
+.task-list{
+    height:80%;
+    overflow-y:scroll;
+    list-style-type:none;
+    margin:0;
+    padding:1rem;
+    border: 1px solid var(--dark-blue);
+}
+
+.task-item{
+    font-size:0.8rem;
+    color:white;
+    background-color:var(--dark-blue);
+    border-radius:1rem;
+    margin-bottom:1rem;
+    padding:0.1rem 0.8rem;
+    cursor: pointer;
+    border:2px outset var(--white);
+}
+
+.task-item:hover{
+    color:var(--dark-blue);
+    background-color:white;
+    border:2px outset var(--dark-blue);
+}
+
+.task-item > p{
+    background-color:white;
+    color:var(--dark-blue);
+    font-weight:bold;
+
+    display:inline-block;
+
+    border-radius:1rem;
+    border-width:1rem;
+    border:1px solid var(--white);
+
+    padding:0.4rem;
+    margin-left:0.5rem;
+}
+
+.task-item:hover >p{
+    border:1px solid var(--dark-blue);
+}
+
+.task-item > .task-category,
+.task-item > .task-warning,
+.task-item > .task-expire{
+    display:none;
+}
+
+.update-task-details,.alert-icon{
+    background:none;
+    font-size:1rem;
+    color:var(--white);
+    margin-top:0.4rem;
+    display:inline-block;
+    cursor: pointer;
+    margin-left:0.5rem;
+    border:none;
+}
+
+.task-item:hover > .update-task-details,
+.task-item:hover > .alert-icon{
+    color:var(--dark-blue);
+}
+
+.buttons-holder{
+    display:flex;
+    justify-content:space-around;
+    align-content:center;
+    padding:2rem;
+}
+
+.delete-task,.create-task{
+    background-color:var(--dark-blue);
+    color:white;
+    box-shadow:0 4px 8px 0 var(--dark-blue), 0 6px 20px 0 var(--light-blue);
+    padding:0.7rem 2rem;
+    border:none;
+    cursor: pointer;
 }

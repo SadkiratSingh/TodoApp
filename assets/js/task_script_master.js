@@ -2,12 +2,10 @@ const allTaskChecks = document.querySelectorAll('.task-marker');
 const allupdateButtons = document.querySelectorAll('.update-task-details');
 const deleteButton = document.querySelector('.delete-task');
 const updateForm = document.querySelector('.tasks-update-form');
+const createButton = document.querySelector('.create-task');
+const divCreateForm = document.querySelector('.create-form-appear');
+const divUpdateForm = document.querySelector('.update-form-appear');
 
-allTaskChecks.forEach(function(item){
-    item.addEventListener('click',function(event){
-        item.parentElement.classList.toggle('selectToDelete');
-    })
-})
 
 allupdateButtons.forEach(function(item){
     item.addEventListener('click',function(event){
@@ -20,6 +18,7 @@ allupdateButtons.forEach(function(item){
         updateFormCtrls['name'].value = name;
         updateFormCtrls['category'].value = category;
         updateFormCtrls['id'].value = item.parentElement.id;
+        divUpdateForm.classList.toggle('form-visible');
     })
 })
 
@@ -48,6 +47,9 @@ deleteButton.addEventListener('click',function(event){
     )
 });
 
+createButton.addEventListener('click',function(event){
+    divCreateForm.classList.toggle('form-visible');
+})
 
 
 async function deleteAction(itemsToDelete){
@@ -84,6 +86,3 @@ async function deleteAction(itemsToDelete){
         throw e;
     } 
 }
-
-
-
