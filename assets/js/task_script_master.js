@@ -25,6 +25,8 @@ allupdateButtons.forEach(function(item){
 
 function getSelectedItems(){
     let allTaskArray = Array.prototype.slice.call(allTaskChecks);
+
+    //filter method does not work on NodeList.
     let selectedItems = allTaskArray.filter((item)=>{
         return item.checked;
     })
@@ -33,10 +35,12 @@ function getSelectedItems(){
 
 deleteButton.addEventListener('click',function(event){
     let selectedItems = getSelectedItems();
-    deleteAction(selectedItems).then( // contruct the ajax call from here //
+
+    // call to async function returns a promise
+    deleteAction(selectedItems).then( 
         (res)=>{
             console.log(res);
-            for(item of selectedItems){
+            for(item of selectedItems){ //selectedItems accessible bcoz of closure
                 item.parentElement.style.display='none';
             }
         },
@@ -48,8 +52,8 @@ deleteButton.addEventListener('click',function(event){
 
 async function deleteAction(itemsToDelete){
     try{
-        let response = await (function(itemsTodelete){
-            return new Promise(function(resolve,reject){
+        let response = await new Promise(function(resolve,reject){
+            
                 let httpObj = new XMLHttpRequest();
                 httpObj.onreadystatechange = function(){
                     try{
@@ -61,15 +65,19 @@ async function deleteAction(itemsToDelete){
                         reject(e.message); //message prop of error instance
                     }
                 }
+
                 httpObj.open('POST','delete/',true);
+
                 let data = new URLSearchParams(); //generating the query string.
                 for (let item of itemsToDelete){
                     data.append(item.name , item.parentElement.id);
                 }
+
+                // necessary step otherwise data wont be parsed by the express middleware
                 httpObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+
                 httpObj.send(data);
-            })
-        })();
+            });
         return response;
     }
     catch(e){

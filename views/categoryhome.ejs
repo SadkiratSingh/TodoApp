@@ -11,9 +11,9 @@
     <h1>CATEGORY MANAGEMENT</h1>
 
     <!--Category-view-Block-->
-    <article id='category-article'>
+    <article id='category-view-article'>
         <h3>All MY CATEGORIES:</h3>
-        <ul class='task-category-list'>
+        <ul class='category-list'>
 
             <% if(categorylist.length==0) { %>
 
@@ -24,6 +24,7 @@
                 <% for (let item of categorylist) { %>
                     <li class='category-list-item'>
                         <p class='category-name'><%= item.name %> </p>
+                        <p class='category-name'><%= item.tasks.length %> </p>
                         <button class='delete-category'><a href='category/delete/<%= item.name %>'>DELETE</a></button>
                         <button class='rename-category'>RENAME</button>
                     </li>
@@ -34,11 +35,11 @@
     </article>
 
     <!--Category Add Block-->
-    <article id='form-article'>
+    <article id='create-category-form-article'>
         <h3>Create Your category here:</h3>
-        <form action='/category/create' method='get'>
+        <form class='create-category-form' action='/category/create' method='get'>
             <div>
-                <input type='text' name='name' placeholder='Your Category'/>
+                <input type='text' name='name' placeholder='Your Category' required/>
             </div>
             <div>
                 <input type='submit' value="Add">
@@ -47,7 +48,7 @@
     </article>
 
     <!--RENAME CATEGORY-->
-    <article id='update-form-article'>
+    <article id='update-category-form-article'>
         <h3>RENAME CATEGORY:</h3>
         <form class='rename-category-form' action='/category/rename' method='get'>
             <input type='hidden' name='org'>

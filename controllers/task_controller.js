@@ -1,40 +1,57 @@
-const ctgModel = require('../modules/category').ctgModel;
+const {ctgModel} = require('../models/category');
 const datefxns = require('../utility/handle_dates');
 
 function create(req,res){
     /* create your task here */
-    let task = req.body.name;
+    let taskName = req.body.name;
     let deadline = req.body.deadline;
-    let category = req.body.category;
+    let categoryName = req.body.category;
+    
+    //findOne is used on mongoose Model. Its first argument is filter object.
+    ctgModel.findOne({name:categoryName},function(err,ctgDoc){
+        if(err) return res.redirect('back');
 
-    ctgModel.findOne({name:category},function(err,ctgDoc){
-        if(err) return console.log(err);
+        //console.log(ctgDoc instanceof mongoose.Document); //true;
+        //console.log(ctgDoc instanceof mongoose.Model); //true
+        //console.log(ctgDoc.tasks.isMongooseArray)
 
-        ctgDoc.tasks.push({name:task,deadline:deadline});
+        //pushing an object to ctgDoc.tasks. This object represents our task containing the keys which represent fields on our schema for task.
+        ctgDoc.tasks.push({name:taskName,deadline:deadline});
+
+        // save takes care of validation and query casting
         ctgDoc.save(function(err){
-            if(err) return console.log(err)
+            if(err) return res.redirect('back');
             return res.redirect('back');
         });
     });
 }
 
 function displayCategoryTasks(req,res){
-    let category = req.params.ctg;
-    let modelQuery = ctgModel.findOne({name:category});
-    modelQuery.exec(function(err,category){
-        if(err) return console.log(err);
+    let categoryName = req.params.ctg;
+
+    //findOne returns a Mongoose.Query instance. This time callback is not used.
+    let query = ctgModel.findOne({name:categoryName});
+
+    //exec executes the db query represented by query
+    query.exec(function(err,ctgDoc){
+        if(err) return res.redirect('back');
         
-        //category.tasks is a mongoose array which is just an extended version of js array;
-        //category is the mongoose document;
+        //map can be used on mongoose array
+        let taskObjects=ctgDoc.tasks.map((task)=>{
+            // here task is mongoose Document instance
 
-        let taskObjects=category.tasks.map((task)=>{
-            let parent = task.parent();
-            task = task.toObject(); // task.__proto__=== Object.prototype
+            let parent = task.parent(); // accessing parent Document via child Document
 
-            /* start modifying the task document after converting to simple js object */
+            task = task.toObject(); // task converted to plain js object bcoz mongoose Document instance is freezed. We cant add properties to it
+
+            /* start modifying the task document after converting to plain js object */
             task.category = parent.name; 
+            
+            // we can access any property on mongoose doc
             [task.lastDate,task.lastTime] = datefxns.calcLastDateAndTime(task.deadline);
+
             task.daysLeft = datefxns.calcDaysLeft(task.deadline);
+
             if(task.daysLeft <= 7 && !datefxns.pastDeadline(task.deadline)){
                 task.warningMsg = "We are approaching the deadline";
             }
@@ -45,26 +62,36 @@ function displayCategoryTasks(req,res){
         });
         return res.render('categorydisplay',{
             'tasks': taskObjects,
-            'category': category.name
+            'category': ctgDoc.name
         });
     });
 }
 
 function taskDelete(req,res){
-    let modelQuery = ctgModel.find({name : {$in: Object.keys(req.body)}});
-    modelQuery.exec(function(err,docs){
+    /* This type of code was done in case of tasks of all categories displayed at once */
+    /* helps us understand the significance of promises in javascript */
+
+    // this statement works similar to 'in' operator in MySQL
+    let query = ctgModel.find({name : {$in: Object.keys(req.body)}});
+
+    query.exec(function(err,docs){
         if(err) return res.json({message:"Internal Server Error!!"});
+        // docs is a plain js array contaning various mongoose Document instances from category collection
+
         let docPromises=docs.map(function(doc){
+            // incase only single task is present in a particular category
             if(!Array.isArray(req.body[doc.name])){
                 doc.tasks.id(req.body[doc.name]).remove();
             }
             else{
                 for (let task_id of req.body[doc.name]){
-                    doc.tasks.id(task_id).remove();
+                    doc.tasks.id(task_id).remove(); //finding the task document in mongoose array via its id and removing it
                 }
             }
-            return doc.save();
+            return doc.save(); // saving a particular category coz its modified. save() also returns promise incase we dont use callback with it.
         })
+
+        // docPromises is an array of unresolved promises generated from save corresponding every category.
         Promise.all(docPromises).then(
             results=>{
                 res.json({message:"Success!!"});
@@ -74,23 +101,23 @@ function taskDelete(req,res){
                 res.json({message:"Internal Server Error!!"});
             }
         )
-    })
+    });
 }
 
 function taskUpdate(req,res){
-    let task = req.body.name;
+    let taskName = req.body.name;
     let deadline = req.body.deadline;
-    let category = req.body.category;
+    let categoryName = req.body.category;
     let taskId = req.body.id;
 
-    ctgModel.findOne({name:category},function(err,ctgDoc){
-        if(err) return console.log(err);
+    ctgModel.findOne({name:categoryName},function(err,ctgDoc){
+        if(err) return res.redirect('back');
 
         let taskToUpdate = ctgDoc.tasks.id(taskId);
-        taskToUpdate.name = task;
+        taskToUpdate.name = taskName; // simply accessing and modifying properties on mongoose Document however we cant add new properties to document.
         taskToUpdate.deadline = deadline;
         ctgDoc.save(function(err){
-            if(err) return console.log(err)
+            if(err) return res.redirect('back');
             return res.redirect('back');
         });
     });

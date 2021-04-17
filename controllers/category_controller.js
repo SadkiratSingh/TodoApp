@@ -1,4 +1,4 @@
-const {ctgSchema,ctgModel} = require('../modules/category');
+const {ctgModel} = require('../models/category');
 
 function home(req,res){
     ctgModel.find({},function(err,ctgList){
@@ -16,7 +16,7 @@ function create(req,res){
 
     //save takes care to call validate fxn on the created document.
     category.save(function(err){
-        if(err) return console.log(err);
+        if(err) return res.redirect('back');
         return res.redirect('/category');
     })
 }
@@ -24,17 +24,17 @@ function create(req,res){
 function deleteCategory(req,res){
     let category = req.params.ctg;
     ctgModel.deleteOne({name:category},function(err,doc){
-        if(err) return console.log(err)
-        res.redirect('back');
+        if(err) return res.redirect('back');
+        return res.redirect('back');
     })
 }
 
 function renameCategory(req,res){
     ctgModel.findOne({name:req.query.org},function(err,doc){
-        if(err) return console.log(err);
+        if(err) return res.redirect('back');
         doc.name = req.query.name;
         doc.save(function(err){
-            if(err) return console.log(err);
+            if(err) return res.redirect('back');
             return res.redirect('back');
         });
     });

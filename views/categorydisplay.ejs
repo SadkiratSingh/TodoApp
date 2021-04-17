@@ -5,16 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='/css/master_css.css' rel='stylesheet'>
-    <title>Display Category Tasks</title>
+    <title>Display Category Wise Tasks</title>
 </head>
 <body>
     <!--content heading-->
     <h1>VIEW <%= category.toUpperCase() %> TASKS</h1>
 
     <!--form to fill task details and create task-->
-    <article id='form-article'>
+    <article id='task-creation-form-article'>
         <h3>Create Your task here:</h3>
-        <form action='/task/create/' method='post'>
+        <form class='task-creation-form' action='/task/create/' method='post'>
             <div>
                 <input type='text' name='name' placeholder='Input new task here'/ required>
             </div>
@@ -82,6 +82,6 @@
         </form>
     </article>
 
-    <script src='/js/script_master.js'></script>
+    <script src='/js/task_script_master.js'></script>
 </body>
 </html>

@@ -1,6 +1,4 @@
-const ctgModel = require('../modules/category').ctgModel
-const datefxns = require('../utility/handle_dates');
-
+const {ctgModel} = require('../models/category')
 
 
 // for what to display
