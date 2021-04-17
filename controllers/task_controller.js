@@ -94,7 +94,12 @@ function taskDelete(req,res){
         // docPromises is an array of unresolved promises generated from save corresponding every category.
         Promise.all(docPromises).then(
             results=>{
-                res.json({message:"Success!!"});
+                if(results.length == 0){
+                    res.json({message:"Please select an item!"});
+                }
+                else{
+                    res.json({message:"Success!!"});
+                }
             }
         ).catch(
             err=>{
