@@ -11,7 +11,12 @@
 </head>
 <body>
     <!--content heading-->
-    <h1>VIEW <%= category.toUpperCase() %> TASKS</h1>
+    <nav>
+        <ul class='nav-links'>
+            <li class='link-item'><a href='/'>home</a></li>
+            <li class='link-item'><a href='/category'>Manage Categories</a></li>
+        </ul>
+    </nav>
 
     <!--form to fill task details and create task-->
     <div class='styling-form create-form-appear'>
@@ -66,7 +71,7 @@
 
                 <% if(tasks.length==0) { %>
 
-                    <li>No Tasks Added</li>
+                    <li style='text-align:center;'>No Tasks Added</li>
 
                 <% }else{ %>
 
@@ -105,11 +110,12 @@
 
             <div class='buttons-holder'>
                 <button class='delete-task'>DELETE TASKS</button>
+                <button class='navigate'>NAVIGATE</button>
                 <button class='create-task'>CREATE TASK</button>
             </div>
 
         </article>
-        
+
     </div>
 
     <!--Tasks Update Block-->
@@ -155,8 +161,7 @@
             </form>
         </article>
     </div>
-
-    <script src='/js/jquery-3.3.1.min.js'></script>
+    
     <script src='/js/task_script_master.js'></script>
     <script src="https://use.fontawesome.com/04e57a1c73.js"></script>
 </body>

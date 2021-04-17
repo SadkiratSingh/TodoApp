@@ -5,6 +5,9 @@ const updateForm = document.querySelector('.tasks-update-form');
 const createButton = document.querySelector('.create-task');
 const divCreateForm = document.querySelector('.create-form-appear');
 const divUpdateForm = document.querySelector('.update-form-appear');
+const alertButtons = document.querySelectorAll('.alert-icon');
+const navLinks = document.querySelector('.nav-links');
+const navigate = document.querySelector('.navigate');
 
 
 allupdateButtons.forEach(function(item){
@@ -49,6 +52,16 @@ deleteButton.addEventListener('click',function(event){
 
 createButton.addEventListener('click',function(event){
     divCreateForm.classList.toggle('form-visible');
+})
+
+navigate.addEventListener('click',function(){
+    navLinks.classList.toggle('nav-visible');
+})
+
+alertButtons.forEach(function(item){
+    item.addEventListener('click',function(event){
+        alert(item.nextElementSibling.innerText);
+    })
 })
 
 
