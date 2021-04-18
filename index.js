@@ -11,7 +11,8 @@ const app = express();
 const port=8000;
 app.set('view engine','ejs');
 app.set('views','./views');
-
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 //application level middleware
 
