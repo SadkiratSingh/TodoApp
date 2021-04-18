@@ -1,44 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link href='/css/home_master.css' rel='stylesheet'>
-    <title><%= title %></title>
-</head>
-<body>
-    <!--project heading-->
-    <h1 id='project-heading'>MY TODO LIST</h1>
 
-    <div class='collection'>
+<!--<link href='/css/home_master.css' rel='stylesheet'>-->
 
-        <article id='all-tasks-collection'>
+<!--project heading-->
+<h1 id='project-heading'>MY TODO LIST</h1>
 
-            <h3 class='main-heading'>Welcome</h3>
-            
-            <div class='hooks'>
+<div class='collection'>
 
-                <form class='intro-form' action='/' method='get'>
-                    <div class='form-item'>
-                        <label for='choose-category'>Choose Category:</label>
-                        <select id='choose-category' name='category'>
-                        <% for (let category of categories){ %>
-                            <option value='<%= category.name %>'><%= category.name %></option>
-                        <% } %>
-                        </select>
-                    </div>
-                    <div class='form-item'>
-                        <input class ='task-submit' type="submit" value='SUBMIT'>
-                    </div>
-                </form>
+    <article id='all-tasks-collection'>
 
-                <button class='big-blue-button'><a href='/category'>MANAGE CATEGORIES</a></button>
-            </div>
-        </article>
-   </div>
-   <script src="https://use.fontawesome.com/04e57a1c73.js"></script>
-</body>
-</html>
+        <h3 class='main-heading'>Welcome</h3>
+        
+        <div class='hooks'>
+
+            <form class='intro-form' action='/' method='get'>
+                <div class='form-item'>
+                    <label for='choose-category'>Choose Category:</label>
+                    <select id='choose-category' name='category'>
+                    <% for (let category of categories){ %>
+                        <option value='<%= category.name %>'><%= category.name %></option>
+                    <% } %>
+                    </select>
+                </div>
+                <div class='form-item'>
+                    <input class ='task-submit' type="submit" value='SUBMIT'>
+                </div>
+            </form>
+
+            <button class='big-blue-button'><a href='/category'>MANAGE CATEGORIES</a></button>
+        </div>
+    </article>
+</div>
+   

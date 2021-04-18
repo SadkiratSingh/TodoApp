@@ -21,7 +21,7 @@ app.use(express.urlencoded());
 app.use(express.static('./assets'));
 
 //MW2
-app.use(expressLayouts); // to tell the express that our views our bounded to some layout
+app.use(expressLayouts); // to tell the render that that views it will fetch are bounded to some layout. This step needs to be done before rendering any view.
 
 //MW3
 app.use(router);

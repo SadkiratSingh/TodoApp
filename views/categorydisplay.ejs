@@ -1,168 +1,155 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link href='/css/task_master_css.css' rel='stylesheet'>
-    <title><%= title %></title>
-</head>
-<body>
-    <!--content heading-->
-    <nav>
-        <ul class='nav-links'>
-            <li class='link-item'><a href='/'>home</a></li>
-            <li class='link-item'><a href='/category'>Manage Categories</a></li>
-        </ul>
-    </nav>
 
-    <!--form to fill task details and create task-->
-    <div class='styling-form create-form-appear form-div'>
 
-        <article id='task-creation-form-article'>
+<!--content heading-->
+<nav>
+    <ul class='nav-links'>
+        <li class='link-item'><a href='/'>home</a></li>
+        <li class='link-item'><a href='/category'>Manage Categories</a></li>
+    </ul>
+</nav>
 
-            <h3 class='form-heading'>Create Your task here:</h3>
+<!--form to fill task details and create task-->
+<div class='styling-form create-form-appear form-div'>
 
-            <form class='task-creation-form main-form' action='/task/create/' method='post'>
+    <article id='task-creation-form-article'>
 
-                <div class='form-item'>
-                    <label for='task-name'>Enter Name:</label>
-                    <div>
-                        <input id='task-name'type='text' name='name' placeholder='Input new task here'/ required>
-                    </div>
+        <h3 class='form-heading'>Create Your task here:</h3>
+
+        <form class='task-creation-form main-form' action='/task/create/' method='post'>
+
+            <div class='form-item'>
+                <label for='task-name'>Enter Name:</label>
+                <div>
+                    <input id='task-name'type='text' name='name' placeholder='Input new task here'/ required>
                 </div>
-
-                <div class='form-item'>
-                    <label for='due-date'>Complete By:</label>
-                    <div>
-                        <input id='due-date' type='datetime-local' name='deadline' required>
-                    </div>
-                </div>
-
-                <div class='form-item'>
-                    <label for='category-name'>Category:</label>
-                    <div>
-                        <input id='category-name' type='text' name='category' value='<%= category %>' readonly required>
-                    </div>
-                </div>
-
-                <div class='form-item'>
-                    <div>
-                        <input class='task-submit' type='submit' value="create">
-                    </div>
-                </div>
-
-            </form>
-
-        </article>
-
-    </div>
-
-    <!--Tasks View Block-->
-    <div class='style-view-tasks'>
-
-        <article id='tasks-view-article'>
-
-            <h3 class='main-heading'>All MY TASKS:</h3>
-
-            <ul class='task-list'>
-
-                <% if(tasks.length==0) { %>
-
-                    <li style='text-align:center;'>No Tasks Added</li>
-
-                <% }else{ %>
-
-                    <% for (var task of tasks){ %>
-                        <li id='<%= task._id %>' class='task-item'>
-
-                            <input type='checkbox' name='<%= category %>' class='task-marker'>
-                            <p class='task-name'><%= task.name %></p>
-                            <p class='task-date'><%= task.lastDate %></p>
-                            <p class='task-time'><%= task.lastTime %></p>
-
-                            <button id='<%= category %>' class='update-task-details'>
-                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </button>
-
-                            <p class='task-category'><%= task.category %></p><!--hidden-->
-
-                            <% if(task.warningMsg || task.expireMsg){ %>
-
-                                <button class='alert-icon'>
-                                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                                </button>
-
-                                <% if(task.warningMsg){ %>
-                                    <p class='task-warning'><%= task.warningMsg %></p><!--hidden-->
-                                <% } %>
-                                <% if(task.expireMsg){ %>
-                                    <p class='task-expire'><%= task.expireMsg %></p><!--hidden-->
-                                <% } %>
-                            <% } %>
-
-                        </li>
-                    <%} %>
-                <% } %>
-            </ul>
-
-            <div class='buttons-holder'>
-                <button class='delete-task big-blue-button'>DELETE TASKS</button>
-                <button class='navigate big-blue-button'>NAVIGATE</button>
-                <button class='create-task big-blue-button'>CREATE TASK</button>
             </div>
 
-        </article>
-
-    </div>
-
-    <!--Tasks Update Block-->
-    <div class='styling-form update-form-appear form-div'>
-
-        <article id='tasks-update-form-article'>
-
-            <h3 class='form-heading'>Update Task Details Form:</h3>
-
-            <form class='tasks-update-form main-form' action='/task/update/' method='post'>
-
-                <div class='form-item'>
-                    <input type='hidden' name='id'>
+            <div class='form-item'>
+                <label for='due-date'>Complete By:</label>
+                <div>
+                    <input id='due-date' type='datetime-local' name='deadline' required>
                 </div>
+            </div>
 
-                <div class='form-item'>
-                    <label for='up-task-name'>Name:</label>
-                    <div>
-                        <input id='up-task-name' type='text' name='name'/ required>
-                    </div>
+            <div class='form-item'>
+                <label for='category-name'>Category:</label>
+                <div>
+                    <input id='category-name' type='text' name='category' value='<%= category %>' readonly required>
                 </div>
+            </div>
 
-                <div class='form-item'>
-                    <label for='up-due-date'>Name:</label>
-                    <div>
-                        <input id='up-due-date' type='datetime-local' name='deadline' required>
-                    </div>
+            <div class='form-item'>
+                <div>
+                    <input class='task-submit' type='submit' value="create">
                 </div>
+            </div>
 
-                <div class='form-item'>
-                    <label for='up-category-name'>Name:</label>
-                    <div>
-                        <input id='up-category-name' type='text' name='category'/ readonly required>
-                    </div>
+        </form>
+
+    </article>
+
+</div>
+
+<!--Tasks View Block-->
+<div class='style-view-tasks'>
+
+    <article id='tasks-view-article'>
+
+        <h3 class='main-heading'>All MY TASKS:</h3>
+
+        <ul class='task-list'>
+
+            <% if(tasks.length==0) { %>
+
+                <li style='text-align:center;'>No Tasks Added</li>
+
+            <% }else{ %>
+
+                <% for (var task of tasks){ %>
+                    <li id='<%= task._id %>' class='task-item'>
+
+                        <input type='checkbox' name='<%= category %>' class='task-marker'>
+                        <p class='task-name'><%= task.name %></p>
+                        <p class='task-date'><%= task.lastDate %></p>
+                        <p class='task-time'><%= task.lastTime %></p>
+
+                        <button id='<%= category %>' class='update-task-details'>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>
+
+                        <p class='task-category'><%= task.category %></p><!--hidden-->
+
+                        <% if(task.warningMsg || task.expireMsg){ %>
+
+                            <button class='alert-icon'>
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                            </button>
+
+                            <% if(task.warningMsg){ %>
+                                <p class='task-warning'><%= task.warningMsg %></p><!--hidden-->
+                            <% } %>
+                            <% if(task.expireMsg){ %>
+                                <p class='task-expire'><%= task.expireMsg %></p><!--hidden-->
+                            <% } %>
+                        <% } %>
+
+                    </li>
+                <%} %>
+            <% } %>
+        </ul>
+
+        <div class='buttons-holder'>
+            <button class='delete-task big-blue-button'>DELETE TASKS</button>
+            <button class='navigate big-blue-button'>NAVIGATE</button>
+            <button class='create-task big-blue-button'>CREATE TASK</button>
+        </div>
+
+    </article>
+
+</div>
+
+<!--Tasks Update Block-->
+<div class='styling-form update-form-appear form-div'>
+
+    <article id='tasks-update-form-article'>
+
+        <h3 class='form-heading'>Update Task Details Form:</h3>
+
+        <form class='tasks-update-form main-form' action='/task/update/' method='post'>
+
+            <div class='form-item'>
+                <input type='hidden' name='id'>
+            </div>
+
+            <div class='form-item'>
+                <label for='up-task-name'>Name:</label>
+                <div>
+                    <input id='up-task-name' type='text' name='name'/ required>
                 </div>
+            </div>
 
-                <div class='form-item'>
-                    <div>
-                        <input class='task-submit' type='submit' value="update">
-                    </div>
+            <div class='form-item'>
+                <label for='up-due-date'>Name:</label>
+                <div>
+                    <input id='up-due-date' type='datetime-local' name='deadline' required>
                 </div>
+            </div>
 
-            </form>
-        </article>
-    </div>
+            <div class='form-item'>
+                <label for='up-category-name'>Name:</label>
+                <div>
+                    <input id='up-category-name' type='text' name='category'/ readonly required>
+                </div>
+            </div>
+
+            <div class='form-item'>
+                <div>
+                    <input class='task-submit' type='submit' value="update">
+                </div>
+            </div>
+
+        </form>
+    </article>
+</div>
     
-    <script src="https://use.fontawesome.com/04e57a1c73.js"></script>
-    <script src='/js/task_script_master.js'></script>
-</body>
-</html>
+<!--<script src='/js/task_script_master.js'></script>-->

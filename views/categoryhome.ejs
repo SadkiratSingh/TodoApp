@@ -1,100 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    <link href='/css/category_master_css.css' rel='stylesheet'>
 
-    <title><%= title %></title>
-</head>
-<body>
-    <!--content heading-->
-    <h1 style='text-align:center;'><a class='heading-link' href='/'><i class="fa fa-home" aria-hidden="true"></i></a>HOME</h1>
+<!--<link href='/css/category_master_css.css' rel='stylesheet'>-->
 
-    <!--Category-view-Block-->
-    <div class='style-category-view'>
 
-        <article id='category-view-article'>
 
-            <h3 class='main-heading'>All MY CATEGORIES:</h3>
+<!--content heading-->
+<h1 style='text-align:center;'><a class='heading-link' href='/'><i class="fa fa-home" aria-hidden="true"></i></a>HOME</h1>
 
-            <ul class='category-list'>
+<!--Category-view-Block-->
+<div class='style-category-view'>
 
-                <% if(categorylist.length==0) { %>
+    <article id='category-view-article'>
 
-                    <li>No Categories Added</li>
+        <h3 class='main-heading'>All MY CATEGORIES:</h3>
 
-                <% }else{ %>
+        <ul class='category-list'>
 
-                    <% for (let item of categorylist) { %>
-                        <li class='category-list-item'>
-                            <p class='category-name'><a href='/task/<%= item.name %>'><%= item.name %></a></p>
-                            <p class='tasks-number'><span>Pending Tasks:</span><%= item.tasks.length %> </p>
-                            <div class='item-button-holder'>
-                                <button class='delete-category'><a href='category/delete/<%= item.name %>'>DELETE</a></button>
-                                <button class='rename-category'>RENAME</button>
-                            </div>
-                        </li>
-                    <% } %>
+            <% if(categorylist.length==0) { %>
 
+                <li>No Categories Added</li>
+
+            <% }else{ %>
+
+                <% for (let item of categorylist) { %>
+                    <li class='category-list-item'>
+                        <p class='category-name'><a href='/task/<%= item.name %>'><%= item.name %></a></p>
+                        <p class='tasks-number'><span>Pending Tasks:</span><%= item.tasks.length %> </p>
+                        <div class='item-button-holder'>
+                            <button class='delete-category'><a href='category/delete/<%= item.name %>'>DELETE</a></button>
+                            <button class='rename-category'>RENAME</button>
+                        </div>
+                    </li>
                 <% } %>
-            </ul>
 
-            <div class='button-holder'>
-                <button class='manage-category big-blue-button'>MANAGE CATEGORY</button>
-            </div>
+            <% } %>
+        </ul>
 
+        <div class='button-holder'>
+            <button class='manage-category big-blue-button'>MANAGE CATEGORY</button>
+        </div>
+
+    </article>
+
+</div>
+
+<div class='manage-category-forms'>
+    <!--Category Add Block-->
+    <div class='create-category form-div'>
+
+        <article id='create-category-form-article'>
+            
+            <h3 class='form-heading'>Create Your category here:</h3>
+
+            <form class='create-category-form main-form' action='/category/create' method='get'>
+                <div class='form-item'>
+                    <label id='category-name'>Category:</label>
+                    <input id='category-name' type='text' name='name' placeholder='Your Category' required/>
+                </div>
+                <div class='form-item'>
+                    <input class='task-submit' type='submit' value="Add">
+                </div>
+            </form>
         </article>
-
     </div>
 
-    <div class='manage-category-forms'>
-        <!--Category Add Block-->
-        <div class='create-category form-div'>
+    <!--RENAME CATEGORY-->
+    <div class='update-category form-div'>
 
-            <article id='create-category-form-article'>
-                
-                <h3 class='form-heading'>Create Your category here:</h3>
+        <article id='update-category-form-article'>
 
-                <form class='create-category-form main-form' action='/category/create' method='get'>
-                    <div class='form-item'>
-                        <label id='category-name'>Category:</label>
-                        <input id='category-name' type='text' name='name' placeholder='Your Category' required/>
-                    </div>
-                    <div class='form-item'>
-                        <input class='task-submit' type='submit' value="Add">
-                    </div>
-                </form>
-            </article>
-        </div>
+            <h3 class='form-heading'>Rename Category:</h3>
 
-        <!--RENAME CATEGORY-->
-        <div class='update-category form-div'>
-
-            <article id='update-category-form-article'>
-
-                <h3 class='form-heading'>Rename Category:</h3>
-
-                <form class='rename-category-form main-form' action='/category/rename' method='get'>
-                    <div class='form-item'>
-                        <input type='hidden' name='org'>
-                    </div>
-                    <div class='form-item'>
-                        <label id='category-name'>Category:</label>
-                        <input type='text' name='name'/ value='Click Rename Button' required readonly>
-                    </div>
-                    <div class='form-item'>
-                        <input class='task-submit' type='submit' value="Submit">
-                    </div>
-                </form>
-            </article>
-        </div>
-
+            <form class='rename-category-form main-form' action='/category/rename' method='get'>
+                <div class='form-item'>
+                    <input type='hidden' name='org'>
+                </div>
+                <div class='form-item'>
+                    <label id='category-name'>Category:</label>
+                    <input type='text' name='name'/ value='Click Rename Button' required readonly>
+                </div>
+                <div class='form-item'>
+                    <input class='task-submit' type='submit' value="Submit">
+                </div>
+            </form>
+        </article>
     </div>
-    <script src="https://use.fontawesome.com/04e57a1c73.js"></script>
-    <script src='/js/category_script_master.js'></script>
-</body>
-</html>
+
+</div>
+    
+<!--<script src='/js/category_script_master.js'></script>-->
