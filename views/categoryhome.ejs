@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link href='/css/category_master_css.css' rel='stylesheet'>
 
-    <title>Manage Category</title>
+    <title><%= title %></title>
 </head>
 <body>
     <!--content heading-->
@@ -19,7 +19,7 @@
 
         <article id='category-view-article'>
 
-            <h3>All MY CATEGORIES:</h3>
+            <h3 class='main-heading'>All MY CATEGORIES:</h3>
 
             <ul class='category-list'>
 
@@ -44,7 +44,7 @@
             </ul>
 
             <div class='button-holder'>
-                <button class='manage-category'>MANAGE CATEGORY</button>
+                <button class='manage-category big-blue-button'>MANAGE CATEGORY</button>
             </div>
 
         </article>
@@ -53,10 +53,13 @@
 
     <div class='manage-category-forms'>
         <!--Category Add Block-->
-        <div class='create-category'>
+        <div class='create-category form-div'>
+
             <article id='create-category-form-article'>
-                <h3>Create Your category here:</h3>
-                <form class='create-category-form' action='/category/create' method='get'>
+                
+                <h3 class='form-heading'>Create Your category here:</h3>
+
+                <form class='create-category-form main-form' action='/category/create' method='get'>
                     <div class='form-item'>
                         <label id='category-name'>Category:</label>
                         <input id='category-name' type='text' name='name' placeholder='Your Category' required/>
@@ -69,16 +72,19 @@
         </div>
 
         <!--RENAME CATEGORY-->
-        <div class='update-category'>
+        <div class='update-category form-div'>
+
             <article id='update-category-form-article'>
-                <h3>Rename Category:</h3>
-                <form class='rename-category-form' action='/category/rename' method='get'>
+
+                <h3 class='form-heading'>Rename Category:</h3>
+
+                <form class='rename-category-form main-form' action='/category/rename' method='get'>
                     <div class='form-item'>
                         <input type='hidden' name='org'>
                     </div>
                     <div class='form-item'>
                         <label id='category-name'>Category:</label>
-                        <input type='text' name='name'/ value='Click Rename Button'>
+                        <input type='text' name='name'/ value='Click Rename Button' required readonly>
                     </div>
                     <div class='form-item'>
                         <input class='task-submit' type='submit' value="Submit">

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link href='/css/home_master.css' rel='stylesheet'>
-    <title>My App</title>
+    <title><%= title %></title>
 </head>
 <body>
     <!--project heading-->
@@ -17,6 +17,8 @@
 
         <article id='all-tasks-collection'>
 
+            <h3 class='main-heading'>Welcome</h3>
+            
             <div class='hooks'>
 
                 <form class='intro-form' action='/' method='get'>
@@ -33,9 +35,10 @@
                     </div>
                 </form>
 
-                <button><a href='/category'>MANAGE CATEGORIES</a></button>
+                <button class='big-blue-button'><a href='/category'>MANAGE CATEGORIES</a></button>
             </div>
         </article>
    </div>
+   <script src="https://use.fontawesome.com/04e57a1c73.js"></script>
 </body>
 </html>

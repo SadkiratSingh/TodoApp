@@ -2,6 +2,7 @@
 const express = require("express");
 require('./config/mongoose');
 const router = require('./routes');
+const expressLayouts = require('express-ejs-layouts');
 // all requires
 
 const app = express();
@@ -18,7 +19,11 @@ app.set('views','./views');
 app.use(express.urlencoded());
 //MW1
 app.use(express.static('./assets'));
+
 //MW2
+app.use(expressLayouts); // to tell the express that our views our bounded to some layout
+
+//MW3
 app.use(router);
 
 

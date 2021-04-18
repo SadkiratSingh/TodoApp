@@ -12,6 +12,7 @@ function home(req,res){
         if(err) return console.log(err);
         return res.render('home',{
             'categories':categories,
+            'title':'Todo App'
         });
     });
 }

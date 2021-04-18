@@ -62,7 +62,8 @@ function displayCategoryTasks(req,res){
         });
         return res.render('categorydisplay',{
             'tasks': taskObjects,
-            'category': ctgDoc.name
+            'category': ctgDoc.name,
+            'title':`Display ${categoryName} tasks`
         });
     });
 }
@@ -77,7 +78,6 @@ function taskDelete(req,res){
     query.exec(function(err,docs){
         if(err) return res.json({message:"Internal Server Error!!"});
         // docs is a plain js array contaning various mongoose Document instances from category collection
-
         let docPromises=docs.map(function(doc){
             // incase only single task is present in a particular category
             if(!Array.isArray(req.body[doc.name])){

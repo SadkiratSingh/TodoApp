@@ -1,0 +1,88 @@
+*,*::after,*::before{
+    box-sizing:border-box;
+}
+
+:root{
+    /*my color combination */
+    --light-blue:#6699FF;
+    --medium-blue:#3366CC;
+    --dark-blue:#003399;
+    --white:#FFFFFF;
+
+    /*font-families*/
+    --font-normal:'Open Sans', sans-serif;
+}
+
+body{
+    background-image:linear-gradient(to bottom right,var(--light-blue)1%,var(--white)99%);
+    background-repeat:no-repeat;
+    color:var(--dark-blue);
+    font-family:var(--font-normal);
+    height:100vh;
+    margin:0;
+}
+
+.form-item{
+    display:flex;
+    padding:0.5rem;
+    justify-content:space-between;
+}
+
+.form-item>label{
+    font-weight:bold;
+    padding:0.5rem;
+}
+
+.form-item input{
+    padding:0.4rem;
+    border-radius:0.5rem;
+    border:none;
+}
+
+.task-submit{
+    background-color:var(--dark-blue);
+    color:white;
+    cursor: pointer;
+}
+
+.main-heading{
+    text-align:center;
+    text-decoration:underline;
+    font-style: italic;
+}
+
+.form-heading{
+    background-color:var(--dark-blue);
+    color:white;
+    margin:0;
+}
+
+.main-form{
+    padding:0.15rem;
+}
+
+.big-blue-button{
+    background-color:var(--dark-blue);
+    border:none;
+    box-shadow:0 4px 8px 0 var(--dark-blue), 0 6px 20px 0 var(--light-blue);
+    padding:0.7rem 2rem;
+    cursor: pointer;
+    color:white;
+}
+
+.form-div{
+    border:2px outset var(--white);
+    font-size:0.8rem;
+}
+
+a{
+    text-decoration:none;
+    color:white;
+    display:inline-box;
+    font-weight:bolder;
+}
+
+ul{
+    margin:0;
+    list-style-type:none;
+}

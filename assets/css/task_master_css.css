@@ -1,28 +1,5 @@
-:root{
-    /*my color combination */
-    --light-blue:#6699FF;
-    --medium-blue:#3366CC;
-    --dark-blue:#003399;
-    --white:#FFFFFF;
-
-    /*font-families*/
-    --font-normal:'Open Sans', sans-serif;
-}
-
-body{
-    background-image:linear-gradient(to bottom right,var(--light-blue)1%,var(--white)99%);
-    background-repeat:no-repeat;
-    color:var(--dark-blue);
-    font-family:var(--font-normal);
-    border:1px solid black;
-    height:100vh;
-    margin:0;
-}
-
 .nav-links{
-    margin:0;
     padding:0;
-    list-style-type:none;
     display:flex;
     max-width:50vw;
     justify-content:space-around;
@@ -37,13 +14,9 @@ body{
 }
 
 .link-item > a{
-    display:inline-block;
     padding:0.2rem 1.5rem;
     border-radius:1rem;
-    color:white;
     background-color:var(--dark-blue);
-    text-decoration:none;
-    font-weight:bolder;
 }
 
 .link-item > a:hover{
@@ -56,8 +29,6 @@ body{
 .styling-form{
    position:absolute;
    z-index:1000;
-   border:2px outset var(--white);
-   font-size:0.8rem;
    transform: translateX(-100%);
    transition:transform 0.3s ease-in;
 }
@@ -70,39 +41,6 @@ body{
     transform:translateX(0%);
 }
 
-.styling-form h3{
-    margin:0;
-    background-color:var(--dark-blue);
-    color:white;
-}
-
-.task-creation-form{
-    padding:0.15rem;
-}
-
-.form-item{   
-    padding:0.5rem;
-    display:flex;
-    justify-content:space-between;
-}
-
-.form-item input{
-    padding:0.4rem;
-    border-radius:0.5rem;
-    border:none;
-}
-
-.form-item > label{
-    font-weight:bold;
-    padding:0.5rem;
-}
-
-.task-submit{
-    background-color:var(--dark-blue);
-    color:white;
-    cursor: pointer;
-}
-
 /* STYLING FORMS */
 
 .style-view-tasks{
@@ -113,17 +51,12 @@ body{
 }
 
 .style-view-tasks h3{
-    text-align:center;
-    text-decoration:underline;
-    font-style: oblique;
     font-size:1.5rem;
 }
 
 .task-list{
     max-height:45vh;
     overflow:auto;
-    list-style-type:none;
-    margin:0;
     padding:1rem;
 }
 
@@ -189,13 +122,4 @@ body{
     justify-content:space-between;
     align-content:center;
     padding:2rem;
-}
-
-.delete-task,.create-task,.navigate{
-    background-color:var(--dark-blue);
-    color:white;
-    box-shadow:0 4px 8px 0 var(--dark-blue), 0 6px 20px 0 var(--light-blue);
-    padding:0.7rem 2rem;
-    border:none;
-    cursor: pointer;
 }

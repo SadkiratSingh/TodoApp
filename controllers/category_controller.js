@@ -4,7 +4,8 @@ function home(req,res){
     ctgModel.find({},function(err,ctgList){
         if(err) return console.log("Error in retrieving documents")
         return res.render('categoryhome',{
-            'categorylist':ctgList
+            'categorylist':ctgList,
+            'title':'Manage Category'
         });
     })
     
