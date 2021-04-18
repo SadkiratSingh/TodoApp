@@ -9,7 +9,7 @@ function create(req,res){
     
     //findOne is used on mongoose Model. Its first argument is filter object.
     ctgModel.findOne({name:categoryName},function(err,ctgDoc){
-        if(err) return res.redirect('back');
+        if(err || ctgDoc === null) return res.redirect('back');
 
         //console.log(ctgDoc instanceof mongoose.Document); //true;
         //console.log(ctgDoc instanceof mongoose.Model); //true
@@ -34,7 +34,7 @@ function displayCategoryTasks(req,res){
 
     //exec executes the db query represented by query
     query.exec(function(err,ctgDoc){
-        if(err) return res.redirect('back');
+        if(err || ctgDoc === null) return res.redirect('back');
         
         //map can be used on mongoose array
         let taskObjects=ctgDoc.tasks.map((task)=>{
@@ -95,7 +95,7 @@ function taskDelete(req,res){
         Promise.all(docPromises).then(
             results=>{
                 if(results.length == 0){
-                    res.json({message:"Please select an item!"});
+                    res.json({message:"Please select an item!",changes:results.length});
                 }
                 else{
                     res.json({message:"Success!!"});
@@ -116,7 +116,7 @@ function taskUpdate(req,res){
     let taskId = req.body.id;
 
     ctgModel.findOne({name:categoryName},function(err,ctgDoc){
-        if(err) return res.redirect('back');
+        if(err || ctgDoc === null) return res.redirect('back');
 
         let taskToUpdate = ctgDoc.tasks.id(taskId);
         taskToUpdate.name = taskName; // simply accessing and modifying properties on mongoose Document however we cant add new properties to document.

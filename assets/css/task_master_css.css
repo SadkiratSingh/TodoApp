@@ -121,7 +121,7 @@ body{
 
 .task-list{
     max-height:45vh;
-    overflow-y:scroll;
+    overflow:auto;
     list-style-type:none;
     margin:0;
     padding:1rem;
@@ -174,7 +174,6 @@ body{
     font-size:1rem;
     color:var(--white);
     margin-top:0.4rem;
-    display:inline-block;
     cursor: pointer;
     margin-left:0.5rem;
     border:none;

@@ -41,9 +41,11 @@ deleteButton.addEventListener('click',function(event){
     // call to async function returns a promise
     deleteAction(selectedItems).then( 
         (res)=>{
-            console.log(res);
-            for(item of selectedItems){ //selectedItems accessible bcoz of closure
-                item.parentElement.style.display='none';
+            alert(res.message);
+            if(res.length>0){
+                for(item of selectedItems){ //selectedItems accessible bcoz of closure
+                    item.parentElement.style.display='none';
+                }
             }
         },
         (err)=>console.log(err)
