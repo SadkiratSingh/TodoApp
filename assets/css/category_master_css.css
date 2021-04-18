@@ -144,7 +144,7 @@ body{
     margin-bottom:1rem;
 }
 
-/* this portion is identical to master_css */
+/* this portion is identical to task_master_css */
 
 .create-category h3,.update-category h3{
     background-color:var(--dark-blue);
@@ -178,4 +178,4 @@ body{
     color:white;
     cursor: pointer;
 }
-/* this portion is identical to master_css */
+/* this portion is identical to task_master_css */

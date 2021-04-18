@@ -1,0 +1,81 @@
+:root{
+    /*my color combination */
+    --light-blue:#6699FF;
+    --medium-blue:#3366CC;
+    --dark-blue:#003399;
+    --white:#FFFFFF;
+
+    /*font-families*/
+    --font-normal:'Open Sans', sans-serif;
+}
+
+body{
+    background-image:linear-gradient(to bottom right,var(--light-blue)1%,var(--white)99%);
+    background-repeat:no-repeat;
+    color:var(--dark-blue);
+    font-family:var(--font-normal);
+    height:100vh;
+    margin:0;
+}
+
+#project-heading{
+    text-align:center;
+    text-decoration:underline;
+    font-style:italic
+}
+
+.collection{
+    margin:5rem auto;
+    width:50%;
+}
+
+.hooks{
+    display:flex;
+    justify-content:space-evenly;
+}
+
+.hooks > button{
+    align-self:center;
+    background-color:var(--dark-blue);
+    border:none;
+    box-shadow:0 4px 8px 0 var(--dark-blue), 0 6px 20px 0 var(--light-blue);
+    padding:0.7rem 2rem;
+    cursor: pointer;
+}
+
+.hooks>button a{
+    text-decoration:none;
+    color:white;
+    display:inline-box;
+}
+
+.intro-form{
+    border:1px dotted var(--dark-blue)
+}
+
+.form-item{
+    display:flex;
+    padding:0.5rem;
+    justify-content:space-between;
+}
+
+.form-item>label{
+    font-weight:bold;
+    padding:0.5rem;
+}
+
+.form-item input{
+    padding:0.4rem;
+    border-radius:0.5rem;
+    border:none;
+}
+
+.form-item #choose-category{
+    width:150px;
+}
+
+.task-submit{
+    background-color:var(--dark-blue);
+    color:white;
+    cursor: pointer;
+}

@@ -4,21 +4,38 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link href='/css/home_master.css' rel='stylesheet'>
     <title>My App</title>
 </head>
 <body>
     <!--project heading-->
-    <h1>MY TODO LIST</h1>
-    <article id='all-tasks-collection'>
-        <form action='/' method='get'>
-            <select name='category'>
-            <% for (let category of categories){ %>
-                <option value='<%= category.name %>'><%= category.name %></option>
-            <% } %>
-            </select>
-            <input type="submit" value='SUBMIT'>
-        </form>
-        <button><a href='/category'>MANAGE CATEGORIES</a></button>
-    </article>
+    <h1 id='project-heading'>MY TODO LIST</h1>
+
+    <div class='collection'>
+
+        <article id='all-tasks-collection'>
+
+            <div class='hooks'>
+
+                <form class='intro-form' action='/' method='get'>
+                    <div class='form-item'>
+                        <label for='choose-category'>Choose Category:</label>
+                        <select id='choose-category' name='category'>
+                        <% for (let category of categories){ %>
+                            <option value='<%= category.name %>'><%= category.name %></option>
+                        <% } %>
+                        </select>
+                    </div>
+                    <div class='form-item'>
+                        <input class ='task-submit' type="submit" value='SUBMIT'>
+                    </div>
+                </form>
+
+                <button><a href='/category'>MANAGE CATEGORIES</a></button>
+            </div>
+        </article>
+   </div>
 </body>
 </html>
