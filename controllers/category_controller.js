@@ -31,7 +31,6 @@ function deleteCategory(req,res){
 }
 
 function renameCategory(req,res){
-    console.log(req.query);
     ctgModel.findOne({name:req.query.org},function(err,doc){
         //console.log(doc) incase no document is found mongodb sends a null
         if(err || doc===null) return res.redirect('back');

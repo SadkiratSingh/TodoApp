@@ -73,7 +73,27 @@ body{
 .form-div{
     border:2px outset var(--white);
     font-size:0.8rem;
+    display:flex;
+    position:absolute;
+    z-index:1000;
+    transform: translateX(-95%);
+    transition:transform 0.3s ease-in;
 }
+
+.form-visible{
+    transform:translateX(0%);
+}
+
+.form-div > .form-name{
+    background-color:var(--dark-blue);
+    color:white;
+    writing-mode:vertical-lr;
+    text-orientation:upright;
+    align-self:center;
+    letter-spacing:-1px;
+    font-weight:bold;
+}
+
 
 a{
     text-decoration:none;

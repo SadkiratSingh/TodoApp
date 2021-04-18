@@ -1,6 +1,7 @@
 const renameCategoryButtons = document.querySelectorAll('.rename-category');
-const manageCategory = document.querySelector('.manage-category');
-const manageCategoryForms = document.querySelector('.manage-category-forms');
+const createCategory = document.querySelector('.create-category');
+const createCategoryForm = document.querySelector('.create-category-form-wrapper');
+const renameCategoryForm = document.querySelector('.rename-category-form-wrapper');
 
 renameCategoryButtons.forEach(function(item){
     item.addEventListener('click',function(event){
@@ -8,9 +9,10 @@ renameCategoryButtons.forEach(function(item){
         let RenameFormCtrls = categoryRenameForm.elements;
         RenameFormCtrls['name'].value = item.parentElement.parentElement.querySelector('.category-name').innerText;
         RenameFormCtrls['org'].value = item.parentElement.parentElement.querySelector('.category-name').innerText;
+        renameCategoryForm.classList.toggle('form-visible');
     })
 })
 
-manageCategory.addEventListener('click',function(event){
-    manageCategoryForms.classList.toggle('manage-category-forms-appear');
+createCategory.addEventListener('click',function(event){
+    createCategoryForm.classList.toggle('form-visible');
 })

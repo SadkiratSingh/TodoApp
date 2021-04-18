@@ -9,7 +9,7 @@
 </nav>
 
 <!--form to fill task details and create task-->
-<div class='styling-form create-form-appear form-div'>
+<div class='create-task-form-wrapper form-div'>
 
     <article id='task-creation-form-article'>
 
@@ -20,7 +20,7 @@
             <div class='form-item'>
                 <label for='task-name'>Enter Name:</label>
                 <div>
-                    <input id='task-name'type='text' name='name' placeholder='Input new task here'/ required>
+                    <input id='task-name'type='text' name='name' minlength="10" placeholder='Input new task here'/ required>
                 </div>
             </div>
 
@@ -47,6 +47,9 @@
         </form>
 
     </article>
+    <div class='form-name'>
+        Create Article
+    </div>
 
 </div>
 
@@ -109,7 +112,7 @@
 </div>
 
 <!--Tasks Update Block-->
-<div class='styling-form update-form-appear form-div'>
+<div class='update-task-form-wrapper form-div'>
 
     <article id='tasks-update-form-article'>
 
@@ -124,7 +127,7 @@
             <div class='form-item'>
                 <label for='up-task-name'>Name:</label>
                 <div>
-                    <input id='up-task-name' type='text' name='name'/ required>
+                    <input id='up-task-name' type='text' name='name' minlength="10" required>
                 </div>
             </div>
 
@@ -138,7 +141,7 @@
             <div class='form-item'>
                 <label for='up-category-name'>Name:</label>
                 <div>
-                    <input id='up-category-name' type='text' name='category'/ readonly required>
+                    <input id='up-category-name' type='text' name='category' readonly required>
                 </div>
             </div>
 
@@ -150,6 +153,9 @@
 
         </form>
     </article>
+    <div class='form-name'>
+        Update Article
+    </div>
 </div>
     
 <script src='/js/task_script_master.js'></script>

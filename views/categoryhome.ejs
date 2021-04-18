@@ -36,55 +36,64 @@
         </ul>
 
         <div class='button-holder'>
-            <button class='manage-category big-blue-button'>MANAGE CATEGORY</button>
+            <button class='create-category big-blue-button'>CREATE CATEGORY</button>
         </div>
 
     </article>
 
 </div>
 
-<div class='manage-category-forms'>
     <!--Category Add Block-->
-    <div class='create-category form-div'>
+<div class='create-category-form-wrapper form-div'>
 
-        <article id='create-category-form-article'>
-            
-            <h3 class='form-heading'>Create Your category here:</h3>
+    <article id='create-category-form-article'>
+        
+        <h3 class='form-heading'>Create Your category here:</h3>
 
-            <form class='create-category-form main-form' action='/category/create' method='get'>
-                <div class='form-item'>
-                    <label id='category-name'>Category:</label>
-                    <input id='category-name' type='text' name='name' placeholder='Your Category' required/>
-                </div>
-                <div class='form-item'>
-                    <input class='task-submit' type='submit' value="Add">
-                </div>
-            </form>
-        </article>
+        <form class='create-category-form main-form' action='/category/create' method='get'>
+            <div class='form-item'>
+                <label id='category-name'>Category:</label>
+                <input id='category-name' type='text' name='name' minlength="3" placeholder='Your Category' required/>
+            </div>
+            <div class='form-item'>
+                <input class='task-submit' type='submit' value="Add">
+            </div>
+        </form>
+
+    </article>
+
+    <div class='form-name'>
+        Create Here
     </div>
-
-    <!--RENAME CATEGORY-->
-    <div class='update-category form-div'>
-
-        <article id='update-category-form-article'>
-
-            <h3 class='form-heading'>Rename Category:</h3>
-
-            <form class='rename-category-form main-form' action='/category/rename' method='get'>
-                <div class='form-item'>
-                    <input type='hidden' name='org'>
-                </div>
-                <div class='form-item'>
-                    <label id='category-name'>Category:</label>
-                    <input type='text' name='name'/ value='Click Rename Button' required readonly>
-                </div>
-                <div class='form-item'>
-                    <input class='task-submit' type='submit' value="Submit">
-                </div>
-            </form>
-        </article>
-    </div>
-
+    
 </div>
+    
+
+<!--RENAME CATEGORY-->
+<div class='rename-category-form-wrapper form-div'>
+
+    <article id='update-category-form-article'>
+
+        <h3 class='form-heading'>Rename Category:</h3>
+
+        <form class='rename-category-form main-form' action='/category/rename' method='get'>
+            <div class='form-item'>
+                <input type='hidden' name='org'>
+            </div>
+            <div class='form-item'>
+                <label id='category-name'>Category:</label>
+                <input type='text' name='name'/ required minlength='3'>
+            </div>
+            <div class='form-item'>
+                <input class='task-submit' type='submit' value="Submit">
+            </div>
+        </form>
+    </article>
+
+    <div class='form-name'>
+        Rename Here
+    </div>
+</div>
+
     
 <script src='/js/category_script_master.js'></script>

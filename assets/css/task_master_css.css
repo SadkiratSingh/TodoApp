@@ -26,24 +26,13 @@
 
 /* STYLING FORMS */
 
-.styling-form{
-   position:absolute;
-   z-index:1000;
-   transform: translateX(-100%);
-   transition:transform 0.3s ease-in;
-}
-
-.update-form-appear{
+.update-task-form-wrapper{
     bottom:3rem;
 }
-
-.form-visible{
-    transform:translateX(0%);
-}
-
 /* STYLING FORMS */
 
 .style-view-tasks{
+  
     height:80%;
     width:40%;
     margin:0 auto;
@@ -120,6 +109,5 @@
 .buttons-holder{
     display:flex;
     justify-content:space-between;
-    align-content:center;
     padding:2rem;
 }
